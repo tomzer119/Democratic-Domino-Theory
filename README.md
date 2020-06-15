@@ -55,7 +55,8 @@ This allows you to select a year to see the frequency of each Polity value for e
   
   ### Shiny 
   
-  My complete Shiny Workflow
+  My complete Shiny Workflow.
+  The annotated complete workflow is in app.r
   
   ### Changes In Poltics + Lagged
   The start to my workflow when working from the Regression Angle
