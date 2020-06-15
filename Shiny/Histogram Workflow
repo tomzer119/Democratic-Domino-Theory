@@ -1,0 +1,61 @@
+
+Ui
+
+tabPanel("Introduction",fluid=TRUE,
+             
+             
+             # Sidebar layout with input and output definitions ----
+             sidebarLayout(
+               
+               # Sidebar panel for inputs ----
+               sidebarPanel( h1("GIS3"), h2("Thomas Weil"), h4("Uchicago 2022"),
+                 
+                 # Input: Slider for the number of bins ----
+                 sliderInput(inputId = "bins",
+                             label = "Number of bins:",
+                             min = 1,
+                             max = 20,
+                             value = 30),
+                 selectInput("Year2", label="Select a Year to display",choices= c(1800:2016)) ,
+                 
+                 h6("Last edited June 14th, 2020"), h5(" Polity Data Set"), p("Center for Systemic Peace. Polity 5 Polity-Case format, 1800-2018 www.systemicpeace.org/inscrdata.html 2020. Accessed 3 May 2020. "),  h6("Data Download:"), a("Polity Dataset", href="http://www.systemicpeace.org/inscr/p5v2018d.xls", target="_blank"),
+                 h5("Borders Data Set"), p("Nils B. Weidmann , Doreen Kuse & Kristian Skrede Gleditsch (2010) The Geography of the International System: The CShapes Dataset, International Interactions, 36:1, 86-106, DOI: 10.1080/03050620903554614"),  h6("Website"), a("Cshapes Description", href="https://cran.r-project.org/web/packages/cshapes/cshapes.pdf", target="_blank"),
+                 h6("Interventions Data Set"), p("Pearson, Frederic S., and Robert A. Baumann.  1993.  “International Military Intervention, 1946-1988.”  Inter-University Consortium for Political and Social Research, Data Collection No 6035, University of Michigan, Ann Arbor //// Kisangani, Emizet F., and Jeffrey Pickering.  2008.  “International Military Intervention, 1989-2005.”  Inter-University Consortium for Political and Social Research, Data Collection No 21282, University of Michigan, Ann Arbor. "),  h6("Data Download:"), a("Interventions 1947-2005", href="https://www.k-state.edu/polsci/intervention/MergedIMIData1947-2005.xls", target="_blank")
+                 
+                 
+                 
+                 
+                  ),
+               
+               # Main panel for displaying outputs ----
+               mainPanel(
+                 
+                 # Output: Histogram ----
+                 plotOutput(outputId = "distPlot")
+                 
+               )
+             )
+    ),
+
+
+
+
+
+Sever:
+
+ polity<-read.csv("data/polity5part2.csv")
+  
+  
+  output$distPlot <- renderPlot({
+    z<- polity[polity$year==input$Year2,]
+    z<- z$polity2
+    z<- na.omit(z)
+    x<-z
+    
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+    
+    hist(x, breaks = bins, col = "#75AADB", border = "white",
+         xlab = "Polity",
+         main = paste("Histogram of Polity Through Time-", as.character(input$Year2)))
+    
+  })
