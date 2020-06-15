@@ -38,10 +38,10 @@ This allows you to select a year to see the frequency of each Polity value for e
  
  ### Map of Interventions
  
-  This shows you what active interventions are occuring every year, as well as giving you a list of those intervnetions, the polity of those countries, and the type of intervention. This has one drawback, because there are some countries which have an intervnetion in a  year (for example Japan in 1950), but the geogrpahy data set only has the geometry for Japan starting in 1953. This means a few interventions are exlucded from this map and the list, but only really near the start of the data set (late 40's and early 50's). All interventions are included in the next data set. 
+  This shows you what active interventions are occuring every year, as well as giving you a list of those intervnetions, the polity of those countries, and the type of intervention. This has one drawback, because there are some countries which have an intervnetion in a  year (for example Japan in 1950), but the geogrpahy data set only has the geometry for Japan starting in 1953. This means a few interventions are exlucded from this map and the list, but only really near the start of the data set (late 40's and early 50's). All interventions are included in the next data set. The colors for every type of intervention change so be careful. 
   
   ### Country Tracker
-  This allows you to see the Polity Values for your selected country for all years in the Polity V dataset. It also has the type of intervention as the dot color, with -99 meaning no intervention in that year. This is a bit awkward, but the only way I could get it to show. I plan on cleaning this up as well. It also allows you to chose the scale of your analysis by selecting the start year, meaning if you want to zoom in to the past 70 years you could set the start date as later. 
+  This allows you to see the Polity Values for your selected country for all years in the Polity V dataset. It also has the type of intervention as the dot color, with -99 meaning no intervention in that year. This is a bit awkward, but the only way I could get it to show. I plan on cleaning this up as well. It also allows you to chose the scale of your analysis by selecting the start year, meaning if you want to zoom in to the past 70 years you could set the start date as later.  The colors for every type of intervention change so be careful. 
   
   
   ## Future Directions
