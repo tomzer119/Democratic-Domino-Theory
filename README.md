@@ -4,7 +4,8 @@
 ##### Uchicago Class of 2022
 
 
-
+### Shiny App Link
+https://tomzer216.shinyapps.io/DemocraticDomino/
 
 
 
