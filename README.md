@@ -1,3 +1,9 @@
-## Democratic-Domino-Theory
-Democratic Domino Theory
-HI 
+### Author
+##### Thomas Weil
+##### Political Science and Geogrpahical Sciences Major
+##### Uchicago Class of 2022
+
+
+### Project Overview
+
+
