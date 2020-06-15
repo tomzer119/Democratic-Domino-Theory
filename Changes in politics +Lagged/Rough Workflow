@@ -1,0 +1,201 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+#In this workflow I create a variable to show change in past 4 years and a vairbale to show a 5 year temporal lag on the polity vairable
+#In hind sight, I could have used the lag()... function in r to create the variables, but hindsight is 2020
+#At the end I attempt to run a spatio-temporal regression.
+Read in libraries/Polity
+```{r}
+library(mapview)
+library(matlab)
+library(sf)
+library(sf)
+library(raster)
+library(dplyr)
+library(stringr) 
+library(tidyr) 
+library(spData)
+library(spDataLarge)
+library(rmapshaper)
+library(tmap)
+library(sp)
+library(reshape)
+setwd("/Users/thomasweil/Desktop/YEAR2/ZOOM university/GIS 3/Final")
+polity<-read.csv("polity5part2.csv", stringsAsFactors = FALSE)
+
+
+
+#Rename Countries
+polity<-polity %>% mutate(country2 = (ifelse(country=="Gambia", "The Gambia", country))) %>% mutate(country3=(ifelse(country2=="Congo Brazzaville", "Congo", country2)))%>% mutate(country4=(ifelse(country3=="Congo Kinshasa", "Congo, DRC", country3)))%>% mutate(country5=(ifelse(country4=="Korea North", "North Korea", country4)))%>% mutate(country6=(ifelse(country5=="Korea South", "South Korea", country5))) %>% mutate(country7=(ifelse(country6=="Myanmar (Burma)", "Myanmar", country6)))%>% mutate(country8=(ifelse(country7=="Slovak Republic", "Slovakia", country7))) %>% mutate(country9=(ifelse(country8=="UAE", "United Arab Emirates", country8)))
+
+polity<- select(polity, -c(country,country2, country3,country4,country5,country6, country7,country8))
+
+polity<- rename(polity2, c("country9"="country"))
+polity
+```
+
+#Select for correct variables
+Select Years in questions
+```{r}
+polity2<-select(polity,country,year,polity2)
+polity2001<- filter(polity2, year>=1996)
+polity2001
+
+
+```
+2001 Changing it to other thing
+
+```{r}
+step2<- cast(polity2001,country~year, mean)
+step2
+step2<- na.omit(step2)
+step2
+```
+
+
+
+Making the Variables
+-Change in the past 5 years
+```{r}
+step2<- step2 %>% mutate(diff2018=`2018`-`2014`) %>% mutate(diff2017=`2017`-`2013`)%>% mutate(diff2016=`2016`-`2012`)%>% mutate(diff2015=`2015`-`2011`)%>% mutate(diff2014=`2014`-`2010`)%>% mutate(diff2013=`2013`-`2009`)%>% mutate(diff2012=`2012`-`2008`)%>% mutate(diff2011=`2011`-`2007`)%>% mutate(diff2010=`2010`-`2006`)%>% mutate(diff2009=`2009`-`2005`)%>% mutate(diff2008=`2008`-`2004`)%>% mutate(diff2007=`2007`-`2003`)%>% mutate(diff2006=`2006`-`2002`)%>% mutate(diff2005=`2005`-`2001`)%>% mutate(diff2004=`2004`-`2000`) %>%mutate(diff2003=`2003`-`1999`)%>% mutate(diff2002=`2002`-`1998`) %>%mutate(diff2001=`2001`-`1997`) 
+
+step2<- step2 %>% mutate(lagged2018= `2013`)%>% mutate(lagged2017= `2012`)%>% mutate(lagged2016= `2011`)%>% mutate(lagged2015= `2010`)%>% mutate(lagged2014= `2009`)%>% mutate(lagged2013= `2008`)%>% mutate(lagged2012= `2007`)%>% mutate(lagged2011= `2006`)%>% mutate(lagged2010= `2005`)%>% mutate(lagged2009= `2004`)%>% mutate(lagged2008= `2003`)%>% mutate(lagged2007= `2002`)%>% mutate(lagged2006= `2001`)%>% mutate(lagged2005= `2000`)%>% mutate(lagged2004= `1999`)%>% mutate(lagged2003= `1998`)%>% mutate(lagged2002= `1997`)%>% mutate(lagged2001= `1996`)
+
+step2
+
+
+
+
+#years
+step2
+years<- step2[c(1:24)]
+years
+years<- select(years, -c(`1996`, `1997`, `1998`, `1999`,`2000`))
+#years melt
+years$country=as.character(years$country)
+years
+meltyear<- melt(years, id="country")
+years
+names(meltyear)[3]<-"Polity"
+names(meltyear)[2]<- "Year"
+meltyear
+meltyear<- meltyear %>% mutate(B= paste(country, Year)) %>% mutate(C= gsub("diff", "", B))%>%mutate(ID=gsub(" ","", C)) %>% select(-c(4:5))
+meltyear
+
+
+#Lagged melt
+lagged<- step2[c(1,43:60)]
+meltlagged<- melt(lagged, id="country")
+meltlagged
+names(meltlagged)[3]<- "Lagged"
+names(meltlagged)[2]<- "Lagged Year"
+meltlagged
+meltlagged<- meltlagged %>% mutate(B= paste(country, `Lagged Year`)) %>% mutate(C= gsub("lagged", "", B))%>%mutate(ID=gsub(" ","", C)) %>% select(-c(4:5))
+meltlagged
+
+#diff melt
+diff<- step2[c(1,25:42)]
+meltdiff<-melt(diff, id="country")
+names(meltdiff)[3]<- "Change"
+names(meltdiff)[2]<-"Diff Year"
+meltdiff
+meltdiff<- meltdiff %>% mutate(B= paste(country, `Diff Year`)) %>% mutate(C= gsub("diff", "", B))%>%mutate(ID=gsub(" ","", C)) %>% select(-c(4:5))
+meltdiff
+
+  
+
+```
+
+
+
+
+
+
+
+Do all of the merges
+
+```{r}
+merge1<- merge(meltyear, meltdiff, by= "ID")
+merge1<- select(merge1,-c(country.x,`Diff Year`))
+merge1
+merge2<- merge(merge1, meltlagged, by= "ID")
+merge2
+merge2<- select(merge2, -c(country.y, `Lagged Year`))
+```
+
+
+
+
+
+
+
+
+```{r}
+final2001<- merge2
+final2001<- rename(final2001, c("country"="CNTRY_NAME"))
+
+final2001
+final2001
+
+ 
+   
+```
+
+
+
+
+
+
+
+#read in world as spatial plyons data frame
+
+```{r}
+library(maptools)
+library(spdep)
+setwd("/Users/thomasweil/Desktop/YEAR2/ZOOM university/GIS 3/Final/Longitude_Graticules_and_World_Countries_Boundaries-shp")
+kk<-readShapePoly("99bfd9e7-bb42-4728-87b5-07f8c8ac631c2020328-1-1vef4ev.lu5nk.shp")
+library(cshapes)
+library(tmap)
+
+cshp<-cshp(date=NA, useGW=TRUE)
+
+
+cshp2<- cshp[cshp@data$COWEYEAR == 2016, ]
+cshp2@data
+
+
+
+cshp3<- merge(cshp2, final2001, by="CNTRY_NAME", duplicateGeoms = TRUE)
+
+cshp3@data
+#Omit from a spatial polygons data frame function
+
+sp.na.omit <- function(x, margin=1) {
+  if (!inherits(x, "SpatialPointsDataFrame") & !inherits(x, "SpatialPolygonsDataFrame")) 
+    stop("MUST BE sp SpatialPointsDataFrame OR SpatialPolygonsDataFrame CLASS OBJECT") 
+  na.index <- unique(as.data.frame(which(is.na(x@data),arr.ind=TRUE))[,margin])
+    if(margin == 1) {  
+      cat("DELETING ROWS: ", na.index, "\n") 
+        return( x[-na.index,]  ) 
+    }
+    if(margin == 2) {  
+      cat("DELETING COLUMNS: ", na.index, "\n") 
+        return( x[,-na.index]  ) 
+    }
+}
+
+cshp4 <- sp.na.omit(cshp3, margin = 1)
+cshp4@data
+
+
+coords<-coordinates(cshp4)
+W_dist<-dnearneigh(coords,0,1,longlat = FALSE)
+
+#Reggression for the years 2001-2018, prediciting past change in politics (+ or -) based on the changes around as well as the lagged poltics in that country. 
+sar.chi1<-lagsarlm(Change~ Lagged, data=cshp4@data, W)
+summary(sar.chi)
+#However, I had no clue how r dealt with the temporal aspect of this. There are, after all, 16 ish years in this spatial polygons data frame, did it take that into account at all? How did the neighbors work temporally? No clue 
+
