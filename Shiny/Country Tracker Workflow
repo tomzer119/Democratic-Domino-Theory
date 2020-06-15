@@ -1,0 +1,426 @@
+#Ui Portion
+
+    tabPanel("Country Tracker", fluid=TRUE, 
+             sidebarLayout(
+               sidebarPanel(
+                 
+                 selectInput("Year6", label="Lower Limit",choices= c(1800:2005)),
+                 selectInput("Country", label="Select a Country to display",choices= c("United States" ,           "Canada"                  
+                                                                                       ,  "Cuba"         ,            "Haiti"                   
+                                                                                       , "Dominican Republic" ,      "Jamaica"                 
+                                                                                       ,"Trinidad and Tobago"  ,    "Mexico"                  
+                                                                                       ,"Guatemala"                ,"Honduras"                
+                                                                                       ,"El Salvador"              ,"Nicaragua"               
+                                                                                       ,"Costa Rica"               ,"Panama"                  
+                                                                                       ,"Colombia"                 ,"Venezuela"               
+                                                                                       ,"Guyana"                   ,"Suriname"                
+                                                                                       ,"Ecuador"                  ,"Peru"                    
+                                                                                       ,"Brazil"                   ,"Bolivia"                 
+                                                                                       , "Paraguay"             ,    "Chile"                   
+                                                                                       ,"Argentina"              ,  "Uruguay"                 
+                                                                                       , "United Kingdom"    ,       "Ireland"                 
+                                                                                       , "Netherlands"           ,   "Belgium"                 
+                                                                                       , "Luxembourg"           ,    "France"                  
+                                                                                       , "Switzerland"             , "Spain"                   
+                                                                                       , "Portugal"                , "Germany"                 
+                                                                                       , "Germany West"      ,       "Germany East"            
+                                                                                       , "Poland"                  , "Austria"                 
+                                                                                       , "Hungary"                 , "Czechoslovakia"          
+                                                                                       , "Czech Republic"      ,     "Slovakia"                
+                                                                                       , "Italy"                 ,   "Albania"                 
+                                                                                       , "Kosovo"             ,      "Serbia"                  
+                                                                                       , "Macedonia"        ,        "Croatia"                 
+                                                                                       , "Yugoslavia"         ,      "Bosnia"                  
+                                                                                       , "Serbia and Montenegro" ,   "Montenegro"              
+                                                                                       , "Slovenia"               ,  "Greece"                  
+                                                                                       , "Cyprus"                  , "Bulgaria"                
+                                                                                       , "Moldova"                 , "Romania"                 
+                                                                                       , "USSR"                   ,"Russia"                  
+                                                                                       , "Estonia"         ,         "Latvia"                  
+                                                                                       , "Lithuania"       ,         "Ukraine"                 
+                                                                                       , "Belarus"          ,        "Armenia"                 
+                                                                                       , "Georgia"          ,        "Azerbaijan"              
+                                                                                       , "Finland"            ,      "Sweden"                  
+                                                                                       , "Norway"             ,      "Denmark"                 
+                                                                                       , "Cape Verde"       ,        "Guinea-Bissau"           
+                                                                                       , "Equatorial Guinea" ,       "The Gambia"              
+                                                                                       , "Mali"          ,           "Senegal"                 
+                                                                                       , "Benin"        ,            "Mauritania"              
+                                                                                       , "Niger"          ,          "Ivory Coast"             
+                                                                                       , "Cote D'Ivoire"  ,          "Guinea"                  
+                                                                                       , "Burkina Faso"  ,           "Liberia"                 
+                                                                                       , "Sierra Leone"    ,         "Ghana"                   
+                                                                                       , "Togo"                  ,   "Cameroon"                
+                                                                                       , "Nigeria"              ,    "Gabon"                   
+                                                                                       , "Central African Republic", "Chad"                    
+                                                                                       , "Congo"            ,        "Congo, DRC"              
+                                                                                       , "Uganda"           ,        "Kenya"                   
+                                                                                       , "Tanzania"           ,      "Burundi"                 
+                                                                                       , "Rwanda"             ,      "Somalia"                 
+                                                                                       , "Djibouti"      ,           "South Sudan"             
+                                                                                       , "Ethiopia"      ,           "Eritrea"                 
+                                                                                       , "Angola"         ,          "Mozambique"              
+                                                                                       , "Zambia"         ,          "Zimbabwe"                
+                                                                                       , "Malawi"           ,        "South Africa"            
+                                                                                       , "Namibia"          ,        "Lesotho"                 
+                                                                                       , "Botswana"        ,         "Swaziland"               
+                                                                                       , "Madagascar"     ,          "Comoros"                 
+                                                                                       , "Mauritius"           ,     "Morocco"                 
+                                                                                       , "Algeria"               ,   "Tunisia"                 
+                                                                                       , "Libya"                  ,  "Sudan"                   
+                                                                                       , "Sudan-North"       ,       "Iran"                    
+                                                                                       , "Turkey"        ,           "Iraq"                    
+                                                                                       ,"Egypt"            ,        "Syria"                   
+                                                                                       ,"Lebanon"        ,          "Jordan"                  
+                                                                                       ,"Israel"              ,     "Saudi Arabia"            
+                                                                                       ,"Yemen North"   ,           "Yemen"                   
+                                                                                       ,"Yemen South"   ,           "Kuwait"                  
+                                                                                       ,"Bahrain"             ,     "Qatar"                   
+                                                                                       ,"United Arab Emirates" ,    "Oman"                    
+                                                                                       ,"Afghanistan"          ,    "Turkmenistan"            
+                                                                                       , "Tajikistan"       ,        "Kyrgyzstan"              
+                                                                                       ,"Uzbekistan"      ,         "Kazakhstan"              
+                                                                                       ,"China"               ,     "Mongolia"                
+                                                                                       ,"Taiwan"               ,    "North Korea"             
+                                                                                       ,"South Korea"     ,         "Japan"                   
+                                                                                       ,"India"               ,     "Bhutan"                  
+                                                                                       ,"Pakistan"         ,        "Bangladesh"              
+                                                                                       ,"Myanmar"         ,         "Sri Lanka"               
+                                                                                       ,"Nepal"              ,      "Thailand"                
+                                                                                       ,"Cambodia"         ,        "Laos"                    
+                                                                                       ,"Vietnam North"   ,         "Vietnam South"           
+                                                                                       ,"Vietnam"              ,    "Malaysia"                
+                                                                                       ,"Singapore"            ,    "Philippines"             
+                                                                                       , "Indonesia"             ,   "East Timor"              
+                                                                                       ,"Timor Leste"            ,  "Australia"               
+                                                                                       ,"Papua New Guinea"   ,      "New Zealand"             
+                                                                                       ,"Solomon Islands"        ,  "Fiji"                    
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                                       
+                 )),
+               ),
+               mainPanel(h1("Country Tracker"), plotOutput(outputId="Track"))))
+               
+               
+               
+               
+              # Server Portion
+              
+              
+  output$Track <- renderPlot({
+    polity<-select(polity,country,year, polity2, ccode)
+    polity<- filter(polity, country==input$Country)
+    
+    p<-polity %>% mutate(country2 = (ifelse(country=="Gambia", "The Gambia", country))) %>% mutate(country3=(ifelse(country2=="Congo Brazzaville", "Congo", country2)))%>% mutate(country4=(ifelse(country3=="Congo Kinshasa", "Congo, DRC", country3)))%>% mutate(country5=(ifelse(country4=="Korea North", "North Korea", country4)))%>% mutate(country6=(ifelse(country5=="Korea South", "South Korea", country5))) %>% mutate(country7=(ifelse(country6=="Myanmar (Burma)", "Myanmar", country6)))%>% mutate(country8=(ifelse(country7=="Slovak Republic", "Slovakia", country7))) %>% mutate(country9=(ifelse(country8=="UAE", "United Arab Emirates", country8)))%>% mutate(country10=(ifelse(country9=="Yemen, Noth", "Yemen Arab Emirates", country9)))
+    
+    p<- select(p, -c(country,country2, country3,country4,country5,country6, country7,country8, country9))
+    
+    p<- plyr::rename(p, c("country10"="country"))
+    
+    df<-p
+    
+    df$polity2<-ifelse(df$polity2 %in% NA, -99, df$polity2)
+    df<- mutate(df, COWCODE= ccode)
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 450 & df$year %in% 1947, 2,ifelse(df$intervention !="None",df$intervention, "None") )             
+    df$intervention<-ifelse(df$COWCODE %in% 100 & df$year %in% 1948, 0, ifelse(df$intervention !="None",df$intervention,"None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 732 & df$year %in% 1950, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 731 & df$year %in% 1950, 3,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in%  710 & df$year %in% 1950, 3,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<-ifelse(df$COWCODE %in% 365 & df$year %in% 1950, 3, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 840 & df$year %in% 1951, 2, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 740 & df$year %in% 1953, 5,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 713 & df$year %in% 1955, 1,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 710 & df$year %in% 1955, 3,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 666 & df$year %in% 1956, 0,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<-ifelse(df$COWCODE %in% 663 & df$year %in% 1956, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 651 & df$year %in% 1956, 0, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 660 & df$year %in% 1957, 5, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 640 & df$year %in% 1957, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 660 & df$year %in% 1958, 5,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    
+    df$intervention<-ifelse(df$COWCODE %in% 663 & df$year %in% 1958, 5,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 40 & df$year %in% 1958, 2, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 710 & df$year %in% 1958, 5,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 713 & df$year %in% 1958, 1,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 663 & df$year %in% 1958, 5,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 95 & df$year %in% 1959, 2,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 42 & df$year %in% 1961, 3,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 800 & df$year %in% 1962, 5,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 210 & df$year %in% 1962, 0,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 750 & df$year %in% 1962, 1,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 41 & df$year %in% 1963, 3,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 670 & df$year %in% 1963, 1,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<-ifelse(df$COWCODE %in% 511 & df$year %in% 1964, 0, ifelse(df$intervention !="None",df$intervention,"None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 481 & df$year %in% 1964, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 490 & df$year %in% 1967, 1,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 517 & df$year %in% 1967, 6,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 352 & df$year %in% 1974, 0,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 800 & df$year %in% 1975, 5, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 811 & df$year %in% 1975, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 110 & df$year %in% 1978, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 660 & df$year %in% 1976, 0,ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 93 & df$year %in% 1979, 0, ifelse(df$intervention !="None",df$intervention, "None")) 
+    
+    df$intervention<-ifelse(df$COWCODE %in% 94 & df$year %in% 1979, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 145 & df$year %in% 1979, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 630 & df$year %in% 1980, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 31 & df$year %in% 1980, 5, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 420 & df$year %in% 1981, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 660 & df$year %in% 1982, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 483 & df$year %in% 1983, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    #hey
+    
+    df$intervention<-ifelse(df$COWCODE %in% 55 & df$year %in% 1983, 3, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 625 & df$year %in% 1984, 5, ifelse(df$intervention !="None",df$intervention, "None"))      
+    
+    df$intervention<-ifelse(df$COWCODE %in% 670 & df$year %in% 1984, 1, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 651 & df$year %in% 1984, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 625 & df$year %in% 1985, 5, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in%  325 & df$year %in% 1985, 6, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 620 & df$year %in% 1986, 3, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 145 & df$year %in% 1986, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 90 & df$year %in% 1987, 1, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 91 & df$year %in% 1988, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 95 & df$year %in% 1988, 3, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 700 & df$year %in% 1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 770 & df$year %in% 1988, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 630 & df$year %in% 1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 645 & df$year %in% 1988, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 660 & df$year %in% 1989, 0,  ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 840 & df$year %in% 1989, 1, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 645 & df$year %in% 1991, 3, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 451 & df$year %in% 1992, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 490 & df$year %in% 1994, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 517 & df$year %in% 1994, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 690 & df$year %in% 1994, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 450 & df$year %in% 1996, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 482 & df$year %in% 1996, 0,ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 690 & df$year %in% 1996, 1, ifelse(df$intervention !="None",df$intervention,"None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 339 & df$year %in% 1997, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 451 & df$year %in% 1997, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 484 & df$year %in% 1997, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 531 & df$year %in% 1998, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 910 & df$year %in% 1998, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 710 & df$year %in% 1998, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 625 & df$year %in% 1998, 3, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 700 & df$year %in% 1998, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 450 & df$year %in% 1998, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 700 & df$year %in% 2001, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 437 & df$year %in% 2002 , 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 41 & df$year %in% 2004, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<-ifelse(df$COWCODE %in% 770 & df$year %in% 2004, 6, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 780 & df$year %in% 2005, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 41 & df$year %in% 2005, 0,  ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df
+    #GAP
+    
+    df$intervention<- ifelse(df$COWCODE %in% 850 & df$year>=1947  & df$year<=1951, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 740 & df$year>=1947  & df$year<=1953, 0, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 350 & df$year>=1948  & df$year<=1954, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 660 & df$year>=1948  & df$year<=1998, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 663 & df$year>=1948  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 651 & df$year>=1948  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 652 & df$year>=1948  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 666 & df$year>=1948  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 750 & df$year>=1949  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 770 & df$year>=1949  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 732 & df$year>=1950  & df$year<=1953, 1, ifelse(df$intervention !="None",df$intervention, "None"))
+    
+    df$intervention<- ifelse(df$COWCODE %in% 731 & df$year>=1950  & df$year<=1953, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 731 & df$year>=1953 & df$year<=1984, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 651 & df$year>=1956  & df$year<=1967, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 40 & df$year>=1959  & df$year<=1960, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 490 & df$year>=1960  & df$year<=1961, 5, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 812 & df$year>=1961  & df$year<=1962, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 817 & df$year>=1961  & df$year<=1965, 2, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 678 & df$year>= 1963 & df$year<=1964, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 670 & df$year>=1963  & df$year<=1964, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 352 & df$year>=1964  & df$year<=1974, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 811 & df$year>=1964  & df$year<=1969, 6, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 812 & df$year>=1964  & df$year<=1973, 2, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 816 & df$year>=1964  & df$year<=1975, 3, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 490 & df$year>=1964  & df$year<=1965, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 817 & df$year>=1965  & df$year<=1973, 2, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 42 & df$year>=1965  & df$year<=1966, 2, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 770 & df$year>=1965  & df$year<=1966, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 750 & df$year>=1965  & df$year<=1966, 0, ifelse(df$intervention !="None",df$intervention,"None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 800 & df$year>=1966  & df$year<=1976, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 811 & df$year>=1969  & df$year<=1973, 6, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 651 & df$year>=1973  & df$year<=1979, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 666 & df$year>=1973  & df$year<=1979, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 652 & df$year>=1974  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 352 & df$year>=1974  & df$year<=1988, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 660 & df$year>=1978  & df$year<=1988, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 490 & df$year>=1978  & df$year<=1979, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 92 & df$year>=1983  & df$year<=1988, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 31 & df$year>=1985  & df$year<=1999, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 91 & df$year>=1986  & df$year<=1, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 95 & df$year>=1989  & df$year<=1990, 2, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 450 & df$year>=1990  & df$year<=19901, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 670 & df$year>=1990  & df$year<=1991, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 690 & df$year>=1990  & df$year<=1991, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 520 & df$year>=1992  & df$year<=1994, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 346 & df$year>=1993  & df$year<=1996, 0, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 41 & df$year>=1994  & df$year<=1995, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 700 & df$year>=2001  & df$year<=2005, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    
+    df$intervention<- ifelse(df$COWCODE %in% 645 & df$year>=2003  & df$year<=2005, 3, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 800 & df$year>=2004  & df$year<=2005, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 850 & df$year>= 2004  & df$year<=2005, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df$intervention<- ifelse(df$COWCODE %in% 770 & df$year>=2005  & df$year<=2006, 1, ifelse(df$intervention !="None",df$intervention, "None") )
+    
+    df[is.na(df)]<--99
+    df$country<- as.character(df$country)
+    df$intervention<- as.character(df$intervention) 
+    
+    df<-filter(df, polity2>=-11)
+    
+    ggplot(df, aes(x=year, y=polity2))+geom_point(aes(color=intervention))+coord_cartesian(xlim = c(as.numeric(input$Year6), 2020), ylim = c(-10, 10))
+   
+  })
