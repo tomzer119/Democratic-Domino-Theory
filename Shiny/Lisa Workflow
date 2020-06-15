@@ -1,0 +1,89 @@
+#UI Portion
+tabPanel("Lisa", fluid=TRUE, 
+                             sidebarLayout(
+                               sidebarPanel(
+                                 selectInput("Year3", label="select a Year to display",choices= c(1947:2016)),
+                               ),
+                               mainPanel(h1("Lisa Map"), plotOutput(outputId="LISA"))
+                               
+                             )
+                             
+               ),
+               
+               
+               
+  #Server Portion
+  output$LISA <- renderPlot({
+    polity<-select(polity, country,year, polity2)
+    p<-polity %>% mutate(country2 = (ifelse(country=="Gambia", "The Gambia", country))) %>% mutate(country3=(ifelse(country2=="Congo Brazzaville", "Congo", country2)))%>% mutate(country4=(ifelse(country3=="Congo Kinshasa", "Congo, DRC", country3)))%>% mutate(country5=(ifelse(country4=="Korea North", "North Korea", country4)))%>% mutate(country6=(ifelse(country5=="Korea South", "South Korea", country5))) %>% mutate(country7=(ifelse(country6=="Myanmar (Burma)", "Myanmar", country6)))%>% mutate(country8=(ifelse(country7=="Slovak Republic", "Slovakia", country7))) %>% mutate(country9=(ifelse(country8=="UAE", "United Arab Emirates", country8)))%>% mutate(country10=(ifelse(country9=="Yemen, Noth", "Yemen Arab Emirates", country9)))
+    
+    p<- select(p, -c(country,country2, country3,country4,country5,country6, country7,country8))
+    
+    p<- plyr::rename(p, c("country10"="country"))
+   
+    p<- polity[p$year==input$Year3,]
+    
+    p=na.omit(p)
+    p<-plyr::rename(p, c("country"="CNTRY_NAME"))
+    
+    
+    library(cshapes)
+    cshp<-cshp(date=NA, useGW=TRUE)
+    
+    cshp<- cshp[cshp@data$COWEYEAR>=input$Year3,]
+    cshp<- cshp[cshp@data$COWSYEAR<=input$Year3,]
+    cshp<- merge(cshp, p, by="CNTRY_NAME", duplicateGeoms = TRUE)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    df <- st_as_sf(x = cshp,                         
+                   coords = c("CAPLONG", "CAPLAT"),
+                   crs = projcrs)
+    
+    df<- select(df, CNTRY_NAME, polity2 )
+    df<- na.omit(df)
+    
+    soco_nbq<-poly2nb(df, queen=TRUE)
+    #df_c<-  st_centroid(st_geometry(df), of_largest_polygon=TRUE)
+    #soco_nbq<-dnearneigh(df_c, 0, 1000, row.names= NULL)
+    soco_nbq_w <- nb2listw(soco_nbq, style="W", zero.policy=TRUE)
+    locm <- localmoran(df$polity2, soco_nbq_w)
+    
+    df$s_Polity <- scale(df$polity2) %>% as.vector()
+    df$lag_s_Polity <- lag.listw(soco_nbq_w, df$s_Polity)
+    
+    df2<- df
+   
+    df2 <- st_as_sf(df2) %>% 
+      mutate(quad_sig = ifelse(df2$s_Polity > 0 & 
+                                 df2$lag_s_Polity > 0 & 
+                                 locm[,5] <= 0.05, 
+                               "high-high",
+                               ifelse(df2$s_Polity <= 0 & 
+                                        df2$lag_s_Polity <= 0 & 
+                                        locm[,5] <= 0.05, 
+                                      "low-low", 
+                                      ifelse(df2$s_Polity > 0 & 
+                                               df2$lag_s_Polity<= 0 & 
+                                               locm[,5] <= 0.05, 
+                                             "high-low",
+                                             ifelse(df2$s_Polity<= 0 & 
+                                                      df2$lag_s_Polity > 0 & 
+                                                      locm[,5] <= 0.05,
+                                                    "low-high", 
+                                                    "non-significant")))))
+    
+    
+    
+    
+    
+    tm_shape(df2)+tm_polygons("quad_sig")+tm_legend(legend.position = c("left", "bottom"))
+    
+    
+  
